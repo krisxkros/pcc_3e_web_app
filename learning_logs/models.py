@@ -25,4 +25,4 @@ class Entry(models.Model):
         """Return a simple string representing the entry."""
         if len(self.text) >= 50:
             return f"{self.text[:50]}..."
-        return f"{self.text}"
+        return self.text
