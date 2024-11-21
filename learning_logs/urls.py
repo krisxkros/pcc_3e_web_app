@@ -12,5 +12,9 @@ app_name = "learning_logs"
 # requested from the `learning_logs` app
 urlpatterns = [
     # Home page
-    path("", views.index, name="index")
+    path("", views.index, name="index"),
+    # All topics page
+    path("topics/", views.topics, name="topics"),
+    # Single topic page
+    path("topics/<int:topic_id>/", views.topic, name="topic")
 ]

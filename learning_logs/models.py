@@ -13,7 +13,9 @@ class Topic(models.Model):
 class Entry(models.Model):
     """Something specific learned about a topic."""
     # 'ForeignKey: connect each entry with a particular topic
-    # 'on_delete=models.CASCADE': when a topic is deleted, all the entries associated with that topic should be deleted as well. This is known as a 'cascading delete'.
+    # 'on_delete=models.CASCADE': when a topic is deleted, all the entries
+    # associated with that topic should be deleted as well.
+    # This is known as a 'cascading delete'.
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
