@@ -4,7 +4,7 @@ Django is popular **'web framework'**: a set of tools designed for building inte
 
 A Django project is organized as a group of individual apps that work together to make the project work as a whole.
 
-> ### **TL;DR**
+> ## Summary
 >
 > 1. [Create ąnd activate virtual environment](#create-and-activate-new-virtual-environment)
 > 2. Update pip and install django
@@ -59,6 +59,22 @@ A Django project is organized as a group of individual apps that work together t
 >
 > 11. [Register models](#registering-models-with-an-admin-site) in `admin.py`
 >
+> 12. [Django Shell](#the-django-shell)
+>
+> Creating pages:
+>
+> 13. [Mapping URLs](#mapping-urls)
+>
+>- `urls.py` in main folder
+>- `urls.py` in app folder
+>
+> 14. [Writing views](#writing-views)
+>
+>- `views.py`
+>
+> 15. [Writing templates](#writing-templates)
+>
+>- `.html`
 
 ## Setting up a project
 
@@ -494,5 +510,3 @@ In a large project, it’s common to have:
 - each page in the site inherits from a section template
 
 This way you can easily modify the look and feel of the site as a whole, any section in the site, or any individual page.
-
-### The topics page
