@@ -33,15 +33,22 @@ A Django project is organized as a group of individual apps that work together t
 >CTRL-C
 >```
 >
-> 7. [Start the app](#starting-an-app) (in new terminal window, run where 'manage.py' is located)
+> 7. [Template Language Syntax](#template-language-syntax)
+>
+> - Variables: `{{ first_name }}`
+> - Tags: `{% for topic in topics %}`
+> - Filters: `{{ entry.date_added|date:"d.M.Y, H:i" }}`
+> - Comments: `{% comment %}`
+>
+> 8. [Start the app](#starting-an-app) (in new terminal window, run where 'manage.py' is located)
 >
 >```bash
 >python manage.py startapp 'app_name'
 >```
 >
-> 8. [Define models](#defining-models) in `models.py`
+> 9. [Define models](#defining-models) in `models.py`
 >
-> 9. [Activate models](#activating-models) in `settings.py`
+> 10. [Activate models](#activating-models) in `settings.py`
 >
 > - list 'app_name' app before default apps
 > - migrate database after that:
@@ -51,28 +58,28 @@ A Django project is organized as a group of individual apps that work together t
 >python manage.py migrate
 >```
 >
-> 10. [Create superuser](#the-django-admin-site)
+> 11. [Create superuser](#the-django-admin-site)
 >
 >```bash
 >python manage.py createsuperuser
 >```
 >
-> 11. [Register models](#registering-models-with-an-admin-site) in `admin.py`
+> 12. [Register models](#registering-models-with-an-admin-site) in `admin.py`
 >
-> 12. [Django Shell](#the-django-shell)
+> 13. [Django Shell](#the-django-shell)
 >
 > Creating pages:
 >
-> 13. [Mapping URLs](#mapping-urls)
+> 14. [Mapping URLs](#mapping-urls)
 >
 >- `urls.py` in main folder
 >- `urls.py` in app folder
 >
-> 14. [Writing views](#writing-views)
+> 15. [Writing views](#writing-views)
 >
 >- `views.py`
 >
-> 15. [Writing templates](#writing-templates)
+> 16. [Writing templates](#writing-templates)
 >
 >- `.html`
 
@@ -180,6 +187,82 @@ Use different port like 8001, 8002, 8003... with the following command:
 ```bash
 python manage.py runserver 8001
 ```
+
+## Template Language Syntax
+
+[Documentation](https://docs.djangoproject.com/en/5.1/ref/templates/)
+
+- [Templates topic guide](https://docs.djangoproject.com/en/5.1/topics/templates/)
+
+### Variables
+
+A variable outputs a value from the context, which is a *dict-like object mapping keys to values*.
+
+>`{{ abc }}`
+
+```django
+My first name is {{ first_name }}. My last name is {{ last_name }}.
+```
+
+```json
+{'first_name': 'John', 'last_name': 'Doe'}
+```
+
+Dictionary lookup, attribute lookup and list-index lookups are implemented with a dot notation:
+
+```django
+{{ my_dict.key }}
+{{ my_object.attribute }}
+{{ my_list.0 }}
+```
+
+### Tags
+
+[Reference of built-in tags](https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#ref-templates-builtins-tags)
+
+Tags provide arbitrary logic in the rendering process.
+
+>`{% abc %}`
+
+```django
+{% csrf_token %}
+
+# Most tags accept arguments:
+{% cycle 'odd' 'even' %}
+
+# Some tags (for, if) require beginning and ending tags:
+{% for topic in topics %}
+    <li><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a></li>
+{% empty %}
+<li>No topics have been added yet.</li>
+{% endfor %}
+```
+
+A tag can:
+
+- output content
+- serve as a control structure e.g. an `“if" statement` or a `“for” loop`
+- grab content from a database
+- enable access to other template tags
+
+### Filters
+
+[Reference of built-in filters](https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#ref-templates-builtins-filters)
+
+Filters transform the values of variables and tag arguments.
+
+>`{{ django|title }}`
+
+```django
+# Some filters take an argument:
+{{ entry.date_added|date:"d.M.Y, H:i" }}
+```
+
+### Comments
+
+>`{# this won't be rendered #}`
+
+A `{% comment %}` tag provides multi-line comments.
 
 ## Starting an app
 
